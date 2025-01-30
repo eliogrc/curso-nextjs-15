@@ -1,22 +1,23 @@
-"use client"
-
-import { useEffect, useState } from "react"
-
 import { Heading, Text } from "@chakra-ui/react"
 
 import { Bookmark } from "@/components/bookmark"
-import { BookmarkType } from "./schema"
+// import { BookmarkType } from "./schema"
+import { orm } from "./db"
 
-export default function Bookmarks() {
-  const [bookmarks, setBookmarks] = useState<BookmarkType[]>([])
+export default async function Bookmarks() {
 
-  useEffect(() => {
-    fetch("/bookmarks/api", {
-      next: { tags: ["bookmarks"] },
-    })
-      .then((response) => response.json() as Promise<{ data: BookmarkType[] }>)
-      .then(({ data }) => setBookmarks(data))
-  }, [])
+    /*
+    NOTA. Esta es una forma de consumir datos desde un server component pero no es recomendable usarlo en producción.
+
+    const bookmarksResponse = await fetch("http://localhost:3000/bookmarks/api")
+    const bookmarks = (await bookmarksResponse.json()) as { data: BookmarkType[] };*/
+
+  const bookmarks = await orm.query.bookmarks.findMany({
+    limit: 10,
+    with: {
+      author: true,
+    },
+  })
 
   return (
     <main className="mt-12">
