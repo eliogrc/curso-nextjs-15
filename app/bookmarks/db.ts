@@ -11,9 +11,7 @@ if (!process.env.POSTGRESQL_ENDPOINT) {
   throw new Error("POSTGRESQL_ENDPOINT env var is not set")
 }
 
-const DB_NAME = "nextjs"
-
-export const client = postgres(`${process.env.POSTGRESQL_ENDPOINT}/${DB_NAME}`)
+export const client = postgres(process.env.POSTGRESQL_ENDPOINT)
 
 export const orm = drizzle(client, {
   schema,
