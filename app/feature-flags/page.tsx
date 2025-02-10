@@ -11,6 +11,16 @@ const context = {
 export const dynamic = "force-dynamic" // 'auto' | 'force-dynamic' | 'error' | 'force-static'
 // export const revalidate = 10 // false, Infinity, number
 
+/**
+ * force-static: Predenderizar la pagina de forma estatica - static site generation
+ * 
+ * auto: Por defecto, Next.js intentará pre-renderizar la página de forma estática
+ * 
+ * error: Si la página no se puede pre-renderizar de forma estática, se mostrará un error
+ * 
+ * 
+ */
+
 export default async function FeatureFlags() {
   const client = await getClient()
   const variation = await client.variation("feature-new-color", context, false)

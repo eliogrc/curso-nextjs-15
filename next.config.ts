@@ -18,7 +18,7 @@ const getSentryConfig = () =>
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
 
-    org: "personal-lsj",
+    org: "eliogrc",
     project: "javascript-nextjs",
 
     // Only print logs for uploading source maps in CI

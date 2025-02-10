@@ -47,10 +47,10 @@ export async function createSession(userId: string) {
   const _cookies = await cookies()
 
   _cookies.set(COOKIE_NAME, session, {
-    httpOnly: true,
-    secure: true,
+    httpOnly: true, // Cliente & server pueden acceder a la cookie
+    secure: true, // HTTPS only
     expires: expiresAt,
-    sameSite: "lax",
+    sameSite: "strict", // lax: Tanto a nuestro dominio como a subdominios
     path: "/",
   })
 }
